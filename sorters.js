@@ -1,3 +1,46 @@
+// MY FUNCTIONS FOR MORE EASY WORK
+
+function el(id) {
+  // Shortcut for selection
+  return document.getElementById(id);
+}
+function arrFromInput(input) {
+  // Split input string ang put to array
+  var arr = new Array();
+  arr = input.split(" ");
+  var numArray = [];
+  // loop through array and make values type number
+  for (i = 0; i < arr.length; i++) {
+    numArray.push(parseInt(arr[i]));
+  }
+  //console.log(numArray);
+  return numArray;
+}
+
+function convertMS(milliseconds) {
+  var day, hour, minute, seconds;
+  seconds = Math.floor(milliseconds / 1000);
+  minute = Math.floor(seconds / 60);
+  seconds = seconds % 60;
+  hour = Math.floor(minute / 60);
+  minute = minute % 60;
+  day = Math.floor(hour / 24);
+  hour = hour % 24;
+  return {
+    day: day,
+    hour: hour,
+    minute: minute,
+    seconds: seconds,
+    mmm: milliseconds
+  };
+}
+
+function timer(elem, before, after) {
+  var result = after - before;
+  var time = convertMS(result);
+  el(elem).innerHTML = time.seconds + ":" + time.mmm;
+}
+
 // // // // // //
 // Úloha 1.7.1
 // // // // // //
@@ -13,7 +56,7 @@ function insertionSort(arr) {
     }
     arr[y + 1] = key;
   }
-  console.log(arr);
+  return arr;
 }
 
 // SELECTION SORT
@@ -33,7 +76,7 @@ function selectionSort(arr) {
       arr[min] = temp;
     }
   }
-  console.log(arr);
+  return arr;
 }
 
 // BUBBLE SORT
@@ -52,10 +95,171 @@ function bubbleSort(arr) {
     }
     n--;
   } while (swapp);
-  console.log(arr);
+  return arr;
 }
-function quickSort(arr) {}
+var items = [5, 3, 7, 6, 2, 9];
+function swap(items, leftIndex, rightIndex) {
+  var temp = items[leftIndex];
+  items[leftIndex] = items[rightIndex];
+  items[rightIndex] = temp;
+}
+function partition(items, left, right) {
+  var pivot = items[Math.floor((right + left) / 2)], //middle element
+    i = left, //left pointer
+    j = right; //right pointer
+  while (i <= j) {
+    while (items[i] < pivot) {
+      i++;
+    }
+    while (items[j] > pivot) {
+      j--;
+    }
+    if (i <= j) {
+      swap(items, i, j); //sawpping two elements
+      i++;
+      j--;
+    }
+  }
+  return i;
+}
+// QUICK SORT
+function quickSort(items, left, right) {
+  var index;
+  if (items.length > 1) {
+    index = partition(items, left, right); //index returned from partition
+    if (left < index - 1) {
+      //more elements on the left side of the pivot num
+      quickSort(items, left, index - 1);
+    }
+    if (index < right) {
+      //more elements on the right side of the pivot num
+      quickSort(items, index, right);
+    }
+  }
+  return items;
+}
 
-insertionSort([5, 2, 4, 1, 3]);
-selectionSort([5, 2, 4, 1, 3]);
-bubbleSort([5, 2, 4, 1, 3]);
+function insertion() {
+  el("insertion-sorted").innerHTML = "";
+  el("insertion-sorted").innerHTML = insertionSort(
+    arrFromInput(el("insertion-input").value)
+  );
+}
+function selection() {
+  el("selection-sorted").innerHTML = "";
+  el("selection-sorted").innerHTML = selectionSort(
+    arrFromInput(el("selection-input").value)
+  );
+}
+function bubble() {
+  el("bubble-sorted").innerHTML = "";
+  el("bubble-sorted").innerHTML = bubbleSort(
+    arrFromInput(el("bubble-input").value)
+  );
+}
+function quick() {
+  el("quick-sorted").innerHTML = "";
+  el("quick-sorted").innerHTML = quickSort(
+    arrFromInput(el("quick-input").value),
+    0,
+    arrFromInput(el("quick-input").value, 0).length - 1
+  );
+}
+
+// // // // // //
+// Úloha 1.7.2
+// // // // // //
+
+// Generating 100 random numbers
+var randNums = [];
+for (var wau = 0; wau < 100; wau++) {
+  randNums.push(Math.floor(Math.random() * 1000));
+}
+
+var loop = [1, 10, 100, 1000, 10000, 100000, 1000000];
+
+// Insertion sort
+function iSort() {
+  for (var index = 0; index < loop.length; index++) {
+    var iBefore = Date.now();
+    for (var x = 0; x < loop[index]; x++) {
+      insertionSort(randNums);
+    }
+    var iAfter = Date.now();
+    timer("i-" + loop[index], iBefore, iAfter);
+  }
+}
+
+// Selecting sort
+function sSort() {
+  for (var index = 0; index < loop.length; index++) {
+    var iBefore = Date.now();
+    for (var x = 0; x < loop[index]; x++) {
+      selectionSort(randNums);
+    }
+    var iAfter = Date.now();
+    timer("s-" + loop[index], iBefore, iAfter);
+  }
+}
+
+// Bubble sort
+function bSort() {
+  for (var index = 0; index < loop.length; index++) {
+    var iBefore = Date.now();
+    for (var x = 0; x < loop[index]; x++) {
+      bubbleSort(randNums);
+    }
+    var iAfter = Date.now();
+    timer("b-" + loop[index], iBefore, iAfter);
+  }
+}
+
+// Quick sort
+function qSort() {
+  for (var index = 0; index < loop.length; index++) {
+    var iBefore = Date.now();
+    for (var x = 0; x < loop[index]; x++) {
+      quickSort(randNums);
+    }
+    var iAfter = Date.now();
+    timer("q-" + loop[index], iBefore, iAfter);
+  }
+}
+
+// // // // // //
+// Úloha 1.7.3
+// // // // // //
+
+// Generating 1250 scores
+var scores = [];
+for (var i = 1; i <= 1250; i++) {
+  scores.push(Math.floor(Math.random() * 100));
+}
+
+// Percentil function
+function percentil(arr, num) {
+  return num;
+}
+
+var studentsHTML = "";
+// Generating 1250 students
+var students = [];
+for (var i = 1; i <= 1250; i++) {
+  var percen = percentil(scores[i], scores[i]);
+  var rate = percen >= 60;
+  students.push({
+    id: i,
+    score: scores[i],
+    percentil: percen,
+    rating: rate
+  });
+  studentsHTML += `
+  <tr>
+  <td>${i}</td>
+  <td>${scores[i]}</td>
+  <td>${percen}</td>
+  <td>${rate}</td>
+</tr>`;
+}
+
+el("students").innerHTML = studentsHTML;

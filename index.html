@@ -12,57 +12,250 @@
   </head>
   <body>
     <div class="container" style="padding:20px 0px">
+      <span class="badge badge-secondary">1.7.1</span>
       <h2 style="margin-top: 30px">Insertion sort</h2>
 
-      <form>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Zadejte čísla oddělená mezerou</label>
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="Numbers"
-          />
-        </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1"
+          >Enter numbers separated by one space</label
+        >
+        <input
+          type="email"
+          class="form-control"
+          id="insertion-input"
+          placeholder="Numbers"
+        />
+      </div>
 
-        <button type="submit" class="btn btn-outline-primary mb-3">Sort</button>
-      </form>
+      <button onclick="insertion()" class="btn btn-outline-primary mb-3">
+        Sort
+      </button>
 
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item active" aria-current="page">
-            <strong>Sežazené: </strong> <span id="">1 6 8 10</span>
+            <strong>Sorted: </strong> <span id="insertion-sorted"></span>
           </li>
         </ol>
       </nav>
+      <img src="" class="img-fluid" alt="Dev Diagram" />
       <hr />
 
       <h2 style="margin-top: 30px">Selection sort</h2>
 
-      <form>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Zadejte čísla oddělená mezerou</label>
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="Numbers"
-          />
-        </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1"
+          >Enter numbers separated by one space</label
+        >
+        <input
+          type="email"
+          class="form-control"
+          id="selection-input"
+          aria-describedby="emailHelp"
+          placeholder="Numbers"
+        />
+      </div>
 
-        <button type="submit" class="btn btn-outline-primary mb-3">Sort</button>
-      </form>
+      <button onclick="selection()" class="btn btn-outline-primary mb-3">
+        Sort
+      </button>
 
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item active" aria-current="page">
-            <strong>Sežazené: </strong> <span id="">1 6 8 10</span>
+            <strong>Sorted: </strong> <span id="selection-sorted"></span>
           </li>
         </ol>
       </nav>
+      <img src="" class="img-fluid" alt="Dev Diagram" />
       <hr />
+
+      <h2 style="margin-top: 30px">Bubble sort</h2>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1"
+          >Enter numbers separated by one space</label
+        >
+        <input
+          type="email"
+          class="form-control"
+          id="bubble-input"
+          aria-describedby="emailHelp"
+          placeholder="Numbers"
+        />
+      </div>
+
+      <button onclick="bubble()" class="btn btn-outline-primary mb-3">
+        Sort
+      </button>
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <strong>Sorted: </strong> <span id="bubble-sorted"></span>
+          </li>
+        </ol>
+      </nav>
+      <img src="" class="img-fluid" alt="Dev Diagram" />
+      <hr />
+
+      <h2 style="margin-top: 30px">Quick sort</h2>
+
+      <div class="form-group">
+        <label for="exampleInputEmail1"
+          >Enter numbers separated by one space</label
+        >
+        <input
+          type="email"
+          class="form-control"
+          id="quick-input"
+          aria-describedby="emailHelp"
+          placeholder="Numbers"
+        />
+      </div>
+
+      <button onclick="quick()" class="btn btn-outline-primary mb-3">
+        Sort
+      </button>
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <strong>Sorted: </strong> <span id="quick-sorted"></span>
+          </li>
+        </ol>
+      </nav>
+      <img src="" class="img-fluid" alt="Dev Diagram" />
+      <hr />
+
+      <span class="badge badge-secondary">1.7.2</span>
+      <h2 style="margin-top: 30px">CPU vs Calculation</h2>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">
+              Sorting 100 numbers
+            </th>
+            <th scope="col">1x</th>
+            <th scope="col">10x</th>
+            <th scope="col">100x</th>
+            <th scope="col">1000x</th>
+            <th scope="col">10 000x</th>
+            <th scope="col">100 000x</th>
+            <th scope="col">1 000 000x</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Insertion Sort</th>
+            <td id="i-1"></td>
+            <td id="i-10"></td>
+            <td id="i-100"></td>
+            <td id="i-1000"></td>
+            <td id="i-10000"></td>
+            <td id="i-100000"></td>
+            <td id="i-1000000"></td>
+          </tr>
+          <tr>
+            <th scope="row">Selection Sort</th>
+            <td id="s-1"></td>
+            <td id="s-10"></td>
+            <td id="s-100"></td>
+            <td id="s-1000"></td>
+            <td id="s-10000"></td>
+            <td id="s-100000"></td>
+            <td id="s-1000000"></td>
+          </tr>
+          <tr>
+            <th scope="row">Bubble Sort</th>
+            <td id="b-1"></td>
+            <td id="b-10"></td>
+            <td id="b-100"></td>
+            <td id="b-1000"></td>
+            <td id="b-10000"></td>
+            <td id="b-100000"></td>
+            <td id="b-1000000"></td>
+          </tr>
+          <tr>
+            <th scope="row">Quick Sort</th>
+            <td id="q-1"></td>
+            <td id="q-10"></td>
+            <td id="q-100"></td>
+            <td id="q-1000"></td>
+            <td id="q-10000"></td>
+            <td id="q-100000"></td>
+            <td id="q-1000000"></td>
+          </tr>
+        </tbody>
+      </table>
+      <button onclick="iSort()" class="btn btn-outline-primary mb-3">
+        insertion
+      </button>
+
+      <button onclick="sSort()" class="btn btn-outline-success mb-3">
+        selection
+      </button>
+
+      <button onclick="bSort()" class="btn btn-outline-warning mb-3">
+        bubble
+      </button>
+
+      <button onclick="qSort()" class="btn btn-outline-info mb-3">
+        quick
+      </button>
+
+      <hr />
+      <span class="badge badge-secondary">1.7.3</span>
+      <h2 style="margin-top: 30px">Students</h2>
+
+      <p>Tabulka studentů</p>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">**</th>
+            <th scope="col">Neseřazený</th>
+            <th scope="col">Seřazený</th>
+          </tr>
+        </thead>
+        <tbody id="">
+          <tr>
+            <th scope="row">Insertion Sort</th>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">Selection Sort</th>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">Bubble Sort</th>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row">Quick Sort</th>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr />
+      <p>Tabulka studentů</p>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">
+              Student
+            </th>
+            <th scope="col">Body</th>
+            <th scope="col">Percentil</th>
+            <th scope="col">Uspěl</th>
+          </tr>
+        </thead>
+        <tbody id="students"></tbody>
+      </table>
     </div>
     <script src="./sorters.js"></script>
   </body>
