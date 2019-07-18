@@ -235,18 +235,26 @@ var scores = [];
 for (var i = 1; i <= 1250; i++) {
   scores.push(Math.floor(Math.random() * 100));
 }
+// Percentile function
+function percentile(numberArray, p) {
+  var sortedNumberArray = numberArray.sort(function(a, b) {
+    return a - b;
+  });
+  var itemIndex = Math.ceil((p / 100) * numberArray.length) - 1;
+  return sortedNumberArray[Math.max(0, itemIndex)];
+}
 
-// Percentil function
-function percentil(arr, num) {
-  return num;
+function percentileWithValueMap(arr, p, valueMapFunction) {
+  return percentile($.map(arr, p, valueMapFunction));
 }
 
 var studentsHTML = "";
 // Generating 1250 students
 var students = [];
 for (var i = 1; i <= 1250; i++) {
-  var percen = percentil(scores[i], scores[i]);
-  var rate = percen >= 60;
+  var percen = percentile(scores, 60);
+  var rate = percen >= 60 ? "ANO" : "NE";
+
   students.push({
     id: i,
     score: scores[i],
@@ -262,4 +270,5 @@ for (var i = 1; i <= 1250; i++) {
 </tr>`;
 }
 
+// Displaying list of students
 el("students").innerHTML = studentsHTML;
