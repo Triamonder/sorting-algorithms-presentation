@@ -236,23 +236,51 @@ for (var i = 1; i <= 1250; i++) {
   scores.push(Math.floor(Math.random() * 100));
 }
 // Percentile function
-function percentile(numberArray, p) {
-  var sortedNumberArray = numberArray.sort(function(a, b) {
-    return a - b;
-  });
-  var itemIndex = Math.ceil((p / 100) * numberArray.length) - 1;
-  return sortedNumberArray[Math.max(0, itemIndex)];
+var data = [13, 2, 4, 4, 8, 4, 1, 9];
+
+function sortNumber(a, b) {
+  return a - b;
 }
 
-function percentileWithValueMap(arr, p, valueMapFunction) {
-  return percentile($.map(arr, p, valueMapFunction));
+function quantile(array, percentile) {
+  array.sort(sortNumber);
+  index = (percentile / 100) * (array.length - 1);
+  if (Math.floor(index) == index) {
+    result = array[index];
+  } else {
+    i = Math.floor(index);
+    fraction = index - i;
+    result = array[i] + (array[i + 1] - array[i]) * fraction;
+  }
+  return result;
 }
+
+var rem = {};
+
+function logArrayElements(element, index, array) {
+  const percentage = Math.floor(quantile(data, element));
+  if (
+    typeof rem["score" + percentage] !== "number" &&
+    data.includes(percentage)
+  )
+    rem["score" + percentage] = element;
+  //if (percentage%1===0)
+  console.log(element + " --> " + percentage);
+}
+var per = [];
+for (var i = 0; i <= 100; i++) {
+  per.push(i);
+}
+per.forEach(logArrayElements);
+console.log(rem);
 
 var studentsHTML = "";
+// Sorting scores to table
+
 // Generating 1250 students
 var students = [];
 for (var i = 1; i <= 1250; i++) {
-  var percen = percentile(scores, 60);
+  var percen = percentile(scores, 10);
   var rate = percen >= 60 ? "ANO" : "NE";
 
   students.push({
