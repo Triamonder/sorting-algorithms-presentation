@@ -18,7 +18,7 @@ Možnost seřazení vlastních napsaných čísel
 
 ## Úkol 1.7.2
 
-Porovnávání rychlosti řadících algoritmů
+Porovnávání rychlosti řadících algoritmů se zaznaměným šasem
 
 ## Úkol 1.7.3
 
@@ -30,7 +30,7 @@ Porovnávání rychlosti seřazení zemí světa
 
 # Výsledek řešení?
 
-Každá zadící funkce se hodí na něco jiného a na jiný objem dat.
+Každá řadící funkce se hodí na něco jiného a na jiný objem dat.
 
 Pro seřazení 100 čísel
 1x - 100x bych použil všechny algoritmy,

@@ -17,8 +17,9 @@ function arrFromInput(input) {
   return numArray;
 }
 
+// Working with time
 function convertMS(milliseconds) {
-  var day, hour, minute, seconds;
+  var day, hour, minute, seconds, zeros;
   seconds = Math.floor(milliseconds / 1000);
   minute = Math.floor(seconds / 60);
   seconds = seconds % 60;
@@ -26,23 +27,31 @@ function convertMS(milliseconds) {
   minute = minute % 60;
   day = Math.floor(hour / 24);
   hour = hour % 24;
+
+  milis = milliseconds % 1000;
+  switch (milis.toString().length) {
+    case 1:
+      zeros = "00";
+      break;
+    case 2:
+      zeros = "0";
+      break;
+    default:
+      zeros = "";
+      break;
+  }
+
   return {
     day: day,
     hour: hour,
     minute: minute,
     seconds: seconds,
-    mmm: milliseconds
+    mmm: zeros + milis
   };
 }
 
-function timer(elem, before, after) {
-  var result = after - before;
-  var time = convertMS(result);
-  el(elem).innerHTML = time.seconds + "," + time.mmm + " s";
-}
-
 // // // // // //
-// Úloha 1.7.1
+// Quest 1.7.1
 // // // // // //
 
 // INSERTION SORT
@@ -79,7 +88,7 @@ function selectionSort(arr) {
   return arr;
 }
 
-// BUBBLE SORT
+// BUBBLE SORT functions
 function bubbleSort(arr) {
   var swapp;
   var n = arr.length - 1;
@@ -104,9 +113,9 @@ function swap(items, leftIndex, rightIndex) {
   items[rightIndex] = temp;
 }
 function partition(items, left, right) {
-  var pivot = items[Math.floor((right + left) / 2)], //middle element
-    i = left, //left pointer
-    j = right; //right pointer
+  var pivot = items[Math.floor((right + left) / 2)],
+    i = left,
+    j = right;
   while (i <= j) {
     while (items[i] < pivot) {
       i++;
@@ -115,30 +124,30 @@ function partition(items, left, right) {
       j--;
     }
     if (i <= j) {
-      swap(items, i, j); //sawpping two elements
+      swap(items, i, j);
       i++;
       j--;
     }
   }
   return i;
 }
-// QUICK SORT
+
+// QUICK SORT functions
 function quickSort(items, left, right) {
   var index;
   if (items.length > 1) {
-    index = partition(items, left, right); //index returned from partition
+    index = partition(items, left, right);
     if (left < index - 1) {
-      //more elements on the left side of the pivot num
       quickSort(items, left, index - 1);
     }
     if (index < right) {
-      //more elements on the right side of the pivot num
       quickSort(items, index, right);
     }
   }
   return items;
 }
 
+// data inserting functions
 function insertion() {
   el("insertion-sorted").innerHTML = "";
   el("insertion-sorted").innerHTML = insertionSort(
@@ -167,7 +176,7 @@ function quick() {
 }
 
 // // // // // //
-// Úloha 1.7.2
+// Quest 1.7.2
 // // // // // //
 
 // Generating 100 random numbers
@@ -178,6 +187,7 @@ for (var wau = 0; wau < 100; wau++) {
 
 var loopCount = [1, 10, 100, 1000, 10000, 100000, 1000000];
 
+// Event listener for sorting
 document.getElementById("iSort").addEventListener(
   "click",
   function() {
@@ -222,7 +232,11 @@ function iSort(loop, startPoint) {
       insertionSort(loop);
     }
     var iAfter = Date.now();
-    timer(startPoint + "-" + loopCount[index], iBefore, iAfter);
+
+    var result = iAfter - iBefore;
+    var time = convertMS(result);
+    el(startPoint + "-" + loopCount[index]).innerHTML =
+      time.seconds + "," + time.mmm + " s";
   }
 }
 
@@ -234,7 +248,11 @@ function sSort(loop, startPoint) {
       selectionSort(loop);
     }
     var iAfter = Date.now();
-    timer(startPoint + "-" + loopCount[index], iBefore, iAfter);
+    console.log(startPoint + "-" + loopCount[index], iBefore, iAfter);
+    var result = iAfter - iBefore;
+    var time = convertMS(result);
+    el(startPoint + "-" + loopCount[index]).innerHTML =
+      time.seconds + "," + time.mmm + " s";
   }
 }
 
@@ -246,7 +264,10 @@ function bSort(loop, startPoint) {
       bubbleSort(loop);
     }
     var iAfter = Date.now();
-    timer(startPoint + "-" + loopCount[index], iBefore, iAfter);
+    var result = iAfter - iBefore;
+    var time = convertMS(result);
+    el(startPoint + "-" + loopCount[index]).innerHTML =
+      time.seconds + "," + time.mmm + " s";
   }
 }
 
@@ -258,7 +279,11 @@ function qSort(loop, startPoint) {
       quickSort(loop);
     }
     var iAfter = Date.now();
-    timer(startPoint + "-" + loopCount[index], iBefore, iAfter);
+    var result = iAfter - iBefore;
+    var time = convertMS(result);
+
+    el(startPoint + "-" + loopCount[index]).innerHTML =
+      time.seconds + "," + time.mmm + " s";
   }
 }
 
@@ -269,7 +294,10 @@ function dSort(loop, startPoint) {
       loop.sort();
     }
     var iAfter = Date.now();
-    timer(startPoint + "-" + loopCount[index], iBefore, iAfter);
+    var result = iAfter - iBefore;
+    var time = convertMS(result);
+    el(startPoint + "-" + loopCount[index]).innerHTML =
+      time.seconds + "," + time.mmm + " s";
   }
 }
 
@@ -277,6 +305,7 @@ function dSort(loop, startPoint) {
 // Úloha 1.7.3
 // // // // // //
 
+// Percentile function
 function quantile(array, percentile) {
   array.sort(sortNumber);
   index = (percentile / 100) * (array.length - 1);
@@ -303,21 +332,19 @@ function logArrayElements(element, index, array) {
     data.includes(percentage)
   )
     rem["score" + percentage] = element;
-  //if (percentage%1===0)
-  // console.log(element + " ---> " + percentage);
 }
 
-// Generating 1250 scores
+// Creating scores array
 var scores = [];
 
-// Percentile function
+// Data for percentile fn
 var data;
 
+// Generating score
 function generateScore(students, maxScore) {
   for (var i = 0; i < students; i++) {
     scores.push(Math.floor(Math.random() * maxScore));
   }
-  // Trouble
   data = JSON.parse(JSON.stringify(scores));
   per.forEach(logArrayElements);
 }
@@ -326,19 +353,13 @@ function sortNumber(a, b) {
   return a - b;
 }
 
-//console.log(rem);
-// End Percentile function
-
-var studentsHTML = "";
-// Sorting scores to table
-
-// Generating 1250 students
+// Generating students array
 var students = [];
 
+// Displaying student table
 function displayStudentsResult() {
   el("students").innerHTML = "";
   var studentsHTML = "";
-  // Get input values
   var studen = el("count-of-students").value;
   console.log(studen);
   var maxScore = el("maximum-score").value;
@@ -366,7 +387,6 @@ function displayStudentsResult() {
     <td>${rate}</td>
   </tr>`;
   }
-  // Displaying list of students
 
   el("students").innerHTML = studentsHTML;
   el("failed-s").innerHTML = failed;
@@ -595,13 +615,10 @@ function shuffle(array) {
     temporaryValue,
     randomIndex;
 
-  // While there remain elements to shuffle...
   while (0 !== currentIndex) {
-    // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
 
-    // And swap it with the current element.
     temporaryValue = array[currentIndex];
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
@@ -610,9 +627,10 @@ function shuffle(array) {
   return array;
 }
 
+// Shuffle countries in array
 var countries = shuffle(country_list);
 
-// Event listeners for clicking a buttons
+// Event listeners for clicking a buttons for sorting countries
 document.getElementById("CiSort").addEventListener(
   "click",
   function() {
