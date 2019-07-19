@@ -34,7 +34,7 @@ Každá zadící funkce se hodí na něco jiného a na jiný objem dat.
 
 Pro seřazení 100 čísel
 1x - 100x bych použil všechny algoritmy,
-1000x bych použil bubble sort
-10 000x bych použil bubble sort
-100 000x bych použil quick spolu s defaultní sort funkcí
+1000x bych použil bubble sort,
+10 000x bych použil bubble sort,
+100 000x bych použil quick spolu s defaultní sort funkcí,
 1 000 000x bych použil insertion sort nebo bubble sort
