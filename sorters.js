@@ -38,7 +38,7 @@ function convertMS(milliseconds) {
 function timer(elem, before, after) {
   var result = after - before;
   var time = convertMS(result);
-  el(elem).innerHTML = time.seconds + ":" + time.mmm;
+  el(elem).innerHTML = time.seconds + "," + time.mmm + " s";
 }
 
 // // // // // //
@@ -226,21 +226,20 @@ function qSort() {
   }
 }
 
+function dSort() {
+  for (var index = 0; index < loop.length; index++) {
+    var iBefore = Date.now();
+    for (var x = 0; x < loop[index]; x++) {
+      randNums.sort();
+    }
+    var iAfter = Date.now();
+    timer("d-" + loop[index], iBefore, iAfter);
+  }
+}
+
 // // // // // //
 // Úloha 1.7.3
 // // // // // //
-
-// Generating 1250 scores
-var scores = [];
-for (var i = 1; i <= 1250; i++) {
-  scores.push(Math.floor(Math.random() * 100));
-}
-// Percentile function
-var data = [13, 2, 4, 4, 8, 4, 1, 9];
-
-function sortNumber(a, b) {
-  return a - b;
-}
 
 function quantile(array, percentile) {
   array.sort(sortNumber);
@@ -256,6 +255,10 @@ function quantile(array, percentile) {
 }
 
 var rem = {};
+var per = [];
+for (var i = 0; i <= 100; i++) {
+  per.push(i);
+}
 
 function logArrayElements(element, index, array) {
   const percentage = Math.floor(quantile(data, element));
@@ -265,38 +268,65 @@ function logArrayElements(element, index, array) {
   )
     rem["score" + percentage] = element;
   //if (percentage%1===0)
-  console.log(element + " --> " + percentage);
+  console.log(element + " ---> " + percentage);
 }
-var per = [];
-for (var i = 0; i <= 100; i++) {
-  per.push(i);
+
+// Generating 1250 scores
+var scores = [];
+
+// Percentile function
+var data;
+
+function generateScore(students, maxScore) {
+  for (var i = 0; i < students; i++) {
+    scores.push(Math.floor(Math.random() * maxScore));
+  }
+  // Trouble
+  data = JSON.parse(JSON.stringify(scores));
+  per.forEach(logArrayElements);
 }
-per.forEach(logArrayElements);
-console.log(rem);
+
+function sortNumber(a, b) {
+  return a - b;
+}
+
+//console.log(rem);
+// End Percentile function
 
 var studentsHTML = "";
 // Sorting scores to table
 
 // Generating 1250 students
 var students = [];
-for (var i = 1; i <= 1250; i++) {
-  var percen = percentile(scores, 10);
-  var rate = percen >= 60 ? "ANO" : "NE";
 
-  students.push({
-    id: i,
-    score: scores[i],
-    percentil: percen,
-    rating: rate
-  });
-  studentsHTML += `
-  <tr>
-  <td>${i}</td>
-  <td>${scores[i]}</td>
-  <td>${percen}</td>
-  <td>${rate}</td>
-</tr>`;
+function displayStudentsResult() {
+  // Get input values
+  var studen = el("count-of-students").value;
+  var maxScore = el("maximum-score").value;
+  var failed = 0;
+  generateScore(parseInt(studen), parseInt(maxScore));
+  for (var i = 0; i < 1250; i++) {
+    var percen = rem["score" + scores[i]];
+    var rate = percen >= 60 ? "ANO" : "NE";
+    failed = percen >= 60 ? failed + 1 : failed;
+    var classa = percen >= 60 ? "table-success" : "table-danger";
+
+    students.push({
+      id: i + 1,
+      score: scores[i],
+      percentil: percen,
+      rating: rate
+    });
+    studentsHTML += `
+    <tr class="${classa}">
+    <td>${i + 1}</td>
+    <td>${scores[i]}</td>
+    <td>${percen}</td>
+    <td>${rate}</td>
+  </tr>`;
+  }
+  // Displaying list of students
+  el("students").innerHTML = studentsHTML;
+  el("failed-s").innerHTML = failed;
+  el("success-s").innerHTML = parseInt(studen) - failed;
 }
-
-// Displaying list of students
-el("students").innerHTML = studentsHTML;
