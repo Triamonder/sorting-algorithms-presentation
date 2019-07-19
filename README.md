@@ -24,7 +24,7 @@ Porovnávání rychlosti řadících algoritmů se zaznaměným šasem
 
 Generování studentských výsledků s percentilem a sezažení jejich úspěšnosti
 
-## Úkol 1.7.3
+## Úkol 1.7.4
 
 Porovnávání rychlosti seřazení zemí světa
 
