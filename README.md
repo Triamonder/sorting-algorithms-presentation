@@ -36,5 +36,5 @@ Pro seřazení 100 čísel:
 1x - 100x bych použil všechny algoritmy,
 1000x bych použil bubble sort,
 10 000x bych použil bubble sort,
-100 000x bych použil quick, bubble a defaultní sort()
+100 000x bych použil quick, bubble a defaultní sort,
 1 000 000x bych použil insertion sort nebo bubble sort
