@@ -188,7 +188,7 @@
             <td id="q-1000000"></td>
           </tr>
           <tr>
-            <th scope="row">JS FN sort()</th>
+            <th scope="row">Default sort()</th>
             <td id="d-1"></td>
             <td id="d-10"></td>
             <td id="d-100"></td>
@@ -199,22 +199,22 @@
           </tr>
         </tbody>
       </table>
-      <button onclick="iSort()" class="btn btn-outline-primary mb-3">
+      <button id="iSort" class="btn btn-outline-primary mb-3">
         insertion
       </button>
 
-      <button onclick="sSort()" class="btn btn-outline-success mb-3">
+      <button id="sSort" class="btn btn-outline-success mb-3">
         selection
       </button>
 
-      <button onclick="bSort()" class="btn btn-outline-warning mb-3">
+      <button id="bSort" class="btn btn-outline-warning mb-3">
         bubble
       </button>
 
-      <button onclick="qSort()" class="btn btn-outline-info mb-3">
+      <button id="qSort" class="btn btn-outline-info mb-3">
         quick
       </button>
-      <button onclick="dSort()" class="btn btn-outline-danger mb-3">
+      <button id="dSort" class="btn btn-outline-danger mb-3">
         default sort()
       </button>
 
@@ -283,6 +283,99 @@
         </thead>
         <tbody id="students"></tbody>
       </table>
+      <hr />
+
+      <span class="badge badge-secondary">1.7.4</span>
+      <h2 style="margin-top: 30px">Sorting countries</h2>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">
+              Sorting
+            </th>
+            <th scope="col">1x</th>
+            <th scope="col">10x</th>
+            <th scope="col">100x</th>
+            <th scope="col">1000x</th>
+            <th scope="col">10 000x</th>
+            <th scope="col">100 000x</th>
+            <th scope="col">1 000 000x</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Insertion Sort</th>
+            <td id="Ci-1"></td>
+            <td id="Ci-10"></td>
+            <td id="Ci-100"></td>
+            <td id="Ci-1000"></td>
+            <td id="Ci-10000"></td>
+            <td id="Ci-100000"></td>
+            <td id="Ci-1000000"></td>
+          </tr>
+          <tr>
+            <th scope="row">Selection Sort</th>
+            <td id="Cs-1"></td>
+            <td id="Cs-10"></td>
+            <td id="Cs-100"></td>
+            <td id="Cs-1000"></td>
+            <td id="Cs-10000"></td>
+            <td id="Cs-100000"></td>
+            <td id="Cs-1000000"></td>
+          </tr>
+          <tr>
+            <th scope="row">Bubble Sort</th>
+            <td id="Cb-1"></td>
+            <td id="Cb-10"></td>
+            <td id="Cb-100"></td>
+            <td id="Cb-1000"></td>
+            <td id="Cb-10000"></td>
+            <td id="Cb-100000"></td>
+            <td id="Cb-1000000"></td>
+          </tr>
+          <tr>
+            <th scope="row">Quick Sort</th>
+            <td id="Cq-1"></td>
+            <td id="Cq-10"></td>
+            <td id="Cq-100"></td>
+            <td id="Cq-1000"></td>
+            <td id="Cq-10000"></td>
+            <td id="Cq-100000"></td>
+            <td id="Cq-1000000"></td>
+          </tr>
+          <tr>
+            <th scope="row">Default sort()</th>
+            <td id="Cd-1"></td>
+            <td id="Cd-10"></td>
+            <td id="Cd-100"></td>
+            <td id="Cd-1000"></td>
+            <td id="Cd-10000"></td>
+            <td id="Cd-100000"></td>
+            <td id="Cd-1000000"></td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="CiSort" class="btn btn-outline-primary mb-3">
+        insertion
+      </button>
+
+      <button id="CsSort" class="btn btn-outline-success mb-3">
+        selection
+      </button>
+
+      <button id="CbSort" class="btn btn-outline-warning mb-3">
+        bubble
+      </button>
+
+      <button id="CqSort" class="btn btn-outline-info mb-3">
+        quick
+      </button>
+      <button id="CdSort" class="btn btn-outline-danger mb-3">
+        default sort()
+      </button>
+
+      <hr />
     </div>
     <script src="./sorters.js"></script>
   </body>

@@ -176,64 +176,100 @@ for (var wau = 0; wau < 100; wau++) {
   randNums.push(Math.floor(Math.random() * 1000));
 }
 
-var loop = [1, 10, 100, 1000, 10000, 100000, 1000000];
+var loopCount = [1, 10, 100, 1000, 10000, 100000, 1000000];
+
+document.getElementById("iSort").addEventListener(
+  "click",
+  function() {
+    iSort(loopCount, "i");
+  },
+  false
+);
+document.getElementById("sSort").addEventListener(
+  "click",
+  function() {
+    sSort(loopCount, "s");
+  },
+  false
+);
+document.getElementById("bSort").addEventListener(
+  "click",
+  function() {
+    bSort(loopCount, "b");
+  },
+  false
+);
+document.getElementById("qSort").addEventListener(
+  "click",
+  function() {
+    qSort(loopCount, "q");
+  },
+  false
+);
+document.getElementById("dSort").addEventListener(
+  "click",
+  function() {
+    dSort(loopCount, "d");
+  },
+  false
+);
 
 // Insertion sort
-function iSort() {
-  for (var index = 0; index < loop.length; index++) {
+function iSort(loop, startPoint) {
+  for (var index = 0; index < loopCount.length; index++) {
     var iBefore = Date.now();
-    for (var x = 0; x < loop[index]; x++) {
-      insertionSort(randNums);
+    for (var x = 0; x < loopCount[index]; x++) {
+      insertionSort(loop);
     }
     var iAfter = Date.now();
-    timer("i-" + loop[index], iBefore, iAfter);
+    timer(startPoint + "-" + loopCount[index], iBefore, iAfter);
   }
 }
 
 // Selecting sort
-function sSort() {
-  for (var index = 0; index < loop.length; index++) {
+function sSort(loop, startPoint) {
+  for (var index = 0; index < loopCount.length; index++) {
     var iBefore = Date.now();
-    for (var x = 0; x < loop[index]; x++) {
-      selectionSort(randNums);
+    for (var x = 0; x < loopCount[index]; x++) {
+      selectionSort(loop);
     }
     var iAfter = Date.now();
-    timer("s-" + loop[index], iBefore, iAfter);
+    timer(startPoint + "-" + loopCount[index], iBefore, iAfter);
   }
 }
 
 // Bubble sort
-function bSort() {
-  for (var index = 0; index < loop.length; index++) {
+function bSort(loop, startPoint) {
+  for (var index = 0; index < loopCount.length; index++) {
     var iBefore = Date.now();
-    for (var x = 0; x < loop[index]; x++) {
-      bubbleSort(randNums);
+    for (var x = 0; x < loopCount[index]; x++) {
+      bubbleSort(loop);
     }
     var iAfter = Date.now();
-    timer("b-" + loop[index], iBefore, iAfter);
+    timer(startPoint + "-" + loopCount[index], iBefore, iAfter);
   }
 }
 
 // Quick sort
-function qSort() {
-  for (var index = 0; index < loop.length; index++) {
+function qSort(loop, startPoint) {
+  for (var index = 0; index < loopCount.length; index++) {
     var iBefore = Date.now();
-    for (var x = 0; x < loop[index]; x++) {
-      quickSort(randNums);
+    for (var x = 0; x < loopCount[index]; x++) {
+      quickSort(loop);
     }
     var iAfter = Date.now();
-    timer("q-" + loop[index], iBefore, iAfter);
+    timer(startPoint + "-" + loopCount[index], iBefore, iAfter);
   }
 }
 
-function dSort() {
-  for (var index = 0; index < loop.length; index++) {
+function dSort(loop, startPoint) {
+  for (var index = 0; index < loopCount.length; index++) {
     var iBefore = Date.now();
-    for (var x = 0; x < loop[index]; x++) {
-      randNums.sort();
+    for (var x = 0; x < loopCount[index]; x++) {
+      loop.sort();
     }
     var iAfter = Date.now();
-    timer("d-" + loop[index], iBefore, iAfter);
+    timer(startPoint + "-" + loopCount[index], iBefore, iAfter);
   }
 }
 
@@ -268,7 +304,7 @@ function logArrayElements(element, index, array) {
   )
     rem["score" + percentage] = element;
   //if (percentage%1===0)
-  console.log(element + " ---> " + percentage);
+  // console.log(element + " ---> " + percentage);
 }
 
 // Generating 1250 scores
@@ -300,12 +336,17 @@ var studentsHTML = "";
 var students = [];
 
 function displayStudentsResult() {
+  el("students").innerHTML = "";
+  var studentsHTML = "";
   // Get input values
   var studen = el("count-of-students").value;
+  console.log(studen);
   var maxScore = el("maximum-score").value;
   var failed = 0;
+  scores = [];
   generateScore(parseInt(studen), parseInt(maxScore));
-  for (var i = 0; i < 1250; i++) {
+
+  for (var i = 0; i < parseInt(studen); i++) {
     var percen = rem["score" + scores[i]];
     var rate = percen >= 60 ? "ANO" : "NE";
     failed = percen >= 60 ? failed + 1 : failed;
@@ -326,7 +367,284 @@ function displayStudentsResult() {
   </tr>`;
   }
   // Displaying list of students
+
   el("students").innerHTML = studentsHTML;
   el("failed-s").innerHTML = failed;
   el("success-s").innerHTML = parseInt(studen) - failed;
 }
+
+// // // // // //
+// Úloha 1.7.4
+// // // // // //
+
+// Countries array
+var country_list = [
+  "Afghanistan",
+  "Albania",
+  "Algeria",
+  "Andorra",
+  "Angola",
+  "Anguilla",
+  "Antigua &amp; Barbuda",
+  "Argentina",
+  "Armenia",
+  "Aruba",
+  "Australia",
+  "Austria",
+  "Azerbaijan",
+  "Bahamas",
+  "Bahrain",
+  "Bangladesh",
+  "Barbados",
+  "Belarus",
+  "Belgium",
+  "Belize",
+  "Benin",
+  "Bermuda",
+  "Bhutan",
+  "Bolivia",
+  "Bosnia &amp; Herzegovina",
+  "Botswana",
+  "Brazil",
+  "British Virgin Islands",
+  "Brunei",
+  "Bulgaria",
+  "Burkina Faso",
+  "Burundi",
+  "Cambodia",
+  "Cameroon",
+  "Canada",
+  "Cape Verde",
+  "Cayman Islands",
+  "Chad",
+  "Chile",
+  "China",
+  "Colombia",
+  "Congo",
+  "Cook Islands",
+  "Costa Rica",
+  "Cote D Ivoire",
+  "Croatia",
+  "Cruise Ship",
+  "Cuba",
+  "Cyprus",
+  "Czech Republic",
+  "Denmark",
+  "Djibouti",
+  "Dominica",
+  "Dominican Republic",
+  "Ecuador",
+  "Egypt",
+  "El Salvador",
+  "Equatorial Guinea",
+  "Estonia",
+  "Ethiopia",
+  "Falkland Islands",
+  "Faroe Islands",
+  "Fiji",
+  "Finland",
+  "France",
+  "French Polynesia",
+  "French West Indies",
+  "Gabon",
+  "Gambia",
+  "Georgia",
+  "Germany",
+  "Ghana",
+  "Gibraltar",
+  "Greece",
+  "Greenland",
+  "Grenada",
+  "Guam",
+  "Guatemala",
+  "Guernsey",
+  "Guinea",
+  "Guinea Bissau",
+  "Guyana",
+  "Haiti",
+  "Honduras",
+  "Hong Kong",
+  "Hungary",
+  "Iceland",
+  "India",
+  "Indonesia",
+  "Iran",
+  "Iraq",
+  "Ireland",
+  "Isle of Man",
+  "Israel",
+  "Italy",
+  "Jamaica",
+  "Japan",
+  "Jersey",
+  "Jordan",
+  "Kazakhstan",
+  "Kenya",
+  "Kuwait",
+  "Kyrgyz Republic",
+  "Laos",
+  "Latvia",
+  "Lebanon",
+  "Lesotho",
+  "Liberia",
+  "Libya",
+  "Liechtenstein",
+  "Lithuania",
+  "Luxembourg",
+  "Macau",
+  "Macedonia",
+  "Madagascar",
+  "Malawi",
+  "Malaysia",
+  "Maldives",
+  "Mali",
+  "Malta",
+  "Mauritania",
+  "Mauritius",
+  "Mexico",
+  "Moldova",
+  "Monaco",
+  "Mongolia",
+  "Montenegro",
+  "Montserrat",
+  "Morocco",
+  "Mozambique",
+  "Namibia",
+  "Nepal",
+  "Netherlands",
+  "Netherlands Antilles",
+  "New Caledonia",
+  "New Zealand",
+  "Nicaragua",
+  "Niger",
+  "Nigeria",
+  "Norway",
+  "Oman",
+  "Pakistan",
+  "Palestine",
+  "Panama",
+  "Papua New Guinea",
+  "Paraguay",
+  "Peru",
+  "Philippines",
+  "Poland",
+  "Portugal",
+  "Puerto Rico",
+  "Qatar",
+  "Reunion",
+  "Romania",
+  "Russia",
+  "Rwanda",
+  "Saint Pierre &amp; Miquelon",
+  "Samoa",
+  "San Marino",
+  "Satellite",
+  "Saudi Arabia",
+  "Senegal",
+  "Serbia",
+  "Seychelles",
+  "Sierra Leone",
+  "Singapore",
+  "Slovakia",
+  "Slovenia",
+  "South Africa",
+  "South Korea",
+  "Spain",
+  "Sri Lanka",
+  "St Kitts &amp; Nevis",
+  "St Lucia",
+  "St Vincent",
+  "St. Lucia",
+  "Sudan",
+  "Suriname",
+  "Swaziland",
+  "Sweden",
+  "Switzerland",
+  "Syria",
+  "Taiwan",
+  "Tajikistan",
+  "Tanzania",
+  "Thailand",
+  "Timor L'Este",
+  "Togo",
+  "Tonga",
+  "Trinidad &amp; Tobago",
+  "Tunisia",
+  "Turkey",
+  "Turkmenistan",
+  "Turks &amp; Caicos",
+  "Uganda",
+  "Ukraine",
+  "United Arab Emirates",
+  "United Kingdom",
+  "United States",
+  "United States Minor Outlying Islands",
+  "Uruguay",
+  "Uzbekistan",
+  "Venezuela",
+  "Vietnam",
+  "Virgin Islands (US)",
+  "Yemen",
+  "Zambia",
+  "Zimbabwe"
+];
+
+// Shuffle function
+function shuffle(array) {
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+var countries = shuffle(country_list);
+
+// Event listeners for clicking a buttons
+document.getElementById("CiSort").addEventListener(
+  "click",
+  function() {
+    iSort(countries, "Ci");
+  },
+  false
+);
+document.getElementById("CsSort").addEventListener(
+  "click",
+  function() {
+    sSort(countries, "Cs");
+  },
+  false
+);
+document.getElementById("CbSort").addEventListener(
+  "click",
+  function() {
+    bSort(countries, "Cb");
+  },
+  false
+);
+document.getElementById("CqSort").addEventListener(
+  "click",
+  function() {
+    qSort(countries, "Cq");
+  },
+  false
+);
+document.getElementById("CdSort").addEventListener(
+  "click",
+  function() {
+    dSort(countries, "Cd");
+  },
+  false
+);
