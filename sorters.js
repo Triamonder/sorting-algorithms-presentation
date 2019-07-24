@@ -1,33 +1,24 @@
 // MY FUNCTIONS FOR MORE EASY WORK
 
-function el(id) {
+function getElement(id) {
   // Shortcut for selection
   return document.getElementById(id);
 }
-function arrFromInput(input) {
+function arrayFromString(str) {
   // Split input string ang put to array
-  var arr = new Array();
-  arr = input.split(" ");
+  var array = new Array();
+  array = str.split(" ");
   var numArray = [];
   // loop through array and make values type number
-  for (i = 0; i < arr.length; i++) {
-    numArray.push(parseInt(arr[i]));
+  for (i = 0; i < array.length; i++) {
+    numArray.push(parseInt(array[i]));
   }
   //console.log(numArray);
   return numArray;
 }
 
 // Working with time
-function convertMS(milliseconds) {
-  var day, hour, minute, seconds, zeros;
-  seconds = Math.floor(milliseconds / 1000);
-  minute = Math.floor(seconds / 60);
-  seconds = seconds % 60;
-  hour = Math.floor(minute / 60);
-  minute = minute % 60;
-  day = Math.floor(hour / 24);
-  hour = hour % 24;
-
+function toMiliseconds(milliseconds) {
   milis = milliseconds % 1000;
   switch (milis.toString().length) {
     case 1:
@@ -42,10 +33,6 @@ function convertMS(milliseconds) {
   }
 
   return {
-    day: day,
-    hour: hour,
-    minute: minute,
-    seconds: seconds,
     mmm: zeros + milis
   };
 }
@@ -104,7 +91,7 @@ function bubbleSort(arr) {
     }
     n--;
   } while (swapp);
-  return arr;
+  return arr.reverse();
 }
 var items = [5, 3, 7, 6, 2, 9];
 function swap(items, leftIndex, rightIndex) {
@@ -149,29 +136,29 @@ function quickSort(items, left, right) {
 
 // data inserting functions
 function insertion() {
-  el("insertion-sorted").innerHTML = "";
-  el("insertion-sorted").innerHTML = insertionSort(
-    arrFromInput(el("insertion-input").value)
+  getElement("insertion-sorted").innerHTML = "";
+  getElement("insertion-sorted").innerHTML = insertionSort(
+    arrayFromString(getElement("insertion-input").value)
   );
 }
 function selection() {
-  el("selection-sorted").innerHTML = "";
-  el("selection-sorted").innerHTML = selectionSort(
-    arrFromInput(el("selection-input").value)
+  getElement("selection-sorted").innerHTML = "";
+  getElement("selection-sorted").innerHTML = selectionSort(
+    arrayFromString(getElement("selection-input").value)
   );
 }
 function bubble() {
-  el("bubble-sorted").innerHTML = "";
-  el("bubble-sorted").innerHTML = bubbleSort(
-    arrFromInput(el("bubble-input").value)
+  getElement("bubble-sorted").innerHTML = "";
+  getElement("bubble-sorted").innerHTML = bubbleSort(
+    arrayFromString(getElement("bubble-input").value)
   );
 }
 function quick() {
-  el("quick-sorted").innerHTML = "";
-  el("quick-sorted").innerHTML = quickSort(
-    arrFromInput(el("quick-input").value),
+  getElement("quick-sorted").innerHTML = "";
+  getElement("quick-sorted").innerHTML = quickSort(
+    arrayFromString(getElement("quick-input").value),
     0,
-    arrFromInput(el("quick-input").value, 0).length - 1
+    arrayFromString(getElement("quick-input").value, 0).length - 1
   );
 }
 
@@ -188,41 +175,21 @@ for (var wau = 0; wau < 100; wau++) {
 var loopCount = [1, 10, 100, 1000, 10000, 100000, 1000000];
 
 // Event listener for sorting
-document.getElementById("iSort").addEventListener(
-  "click",
-  function() {
-    iSort(loopCount, "i");
-  },
-  false
-);
-document.getElementById("sSort").addEventListener(
-  "click",
-  function() {
-    sSort(loopCount, "s");
-  },
-  false
-);
-document.getElementById("bSort").addEventListener(
-  "click",
-  function() {
-    bSort(loopCount, "b");
-  },
-  false
-);
-document.getElementById("qSort").addEventListener(
-  "click",
-  function() {
-    qSort(loopCount, "q");
-  },
-  false
-);
-document.getElementById("dSort").addEventListener(
-  "click",
-  function() {
-    dSort(loopCount, "d");
-  },
-  false
-);
+getElement("iSort").onclick = function() {
+  iSort(loopCount, "i");
+};
+getElement("sSort").onclick = function() {
+  sSort(loopCount, "s");
+};
+getElement("bSort").onclick = function() {
+  bSort(loopCount, "b");
+};
+getElement("qSort").onclick = function() {
+  qSort(loopCount, "q");
+};
+getElement("dSort").onclick = function() {
+  dSort(loopCount, "d");
+};
 
 // Insertion sort
 function iSort(loop, startPoint) {
@@ -234,8 +201,8 @@ function iSort(loop, startPoint) {
     var iAfter = Date.now();
 
     var result = iAfter - iBefore;
-    var time = convertMS(result);
-    el(startPoint + "-" + loopCount[index]).innerHTML =
+    var time = toMiliseconds(result);
+    getElement(startPoint + "-" + loopCount[index]).innerHTML =
       time.seconds + "," + time.mmm + " s";
   }
 }
@@ -250,8 +217,8 @@ function sSort(loop, startPoint) {
     var iAfter = Date.now();
     console.log(startPoint + "-" + loopCount[index], iBefore, iAfter);
     var result = iAfter - iBefore;
-    var time = convertMS(result);
-    el(startPoint + "-" + loopCount[index]).innerHTML =
+    var time = toMiliseconds(result);
+    getElement(startPoint + "-" + loopCount[index]).innerHTML =
       time.seconds + "," + time.mmm + " s";
   }
 }
@@ -265,8 +232,8 @@ function bSort(loop, startPoint) {
     }
     var iAfter = Date.now();
     var result = iAfter - iBefore;
-    var time = convertMS(result);
-    el(startPoint + "-" + loopCount[index]).innerHTML =
+    var time = toMiliseconds(result);
+    getElement(startPoint + "-" + loopCount[index]).innerHTML =
       time.seconds + "," + time.mmm + " s";
   }
 }
@@ -280,9 +247,9 @@ function qSort(loop, startPoint) {
     }
     var iAfter = Date.now();
     var result = iAfter - iBefore;
-    var time = convertMS(result);
+    var time = toMiliseconds(result);
 
-    el(startPoint + "-" + loopCount[index]).innerHTML =
+    getElement(startPoint + "-" + loopCount[index]).innerHTML =
       time.seconds + "," + time.mmm + " s";
   }
 }
@@ -295,8 +262,8 @@ function dSort(loop, startPoint) {
     }
     var iAfter = Date.now();
     var result = iAfter - iBefore;
-    var time = convertMS(result);
-    el(startPoint + "-" + loopCount[index]).innerHTML =
+    var time = toMiliseconds(result);
+    getElement(startPoint + "-" + loopCount[index]).innerHTML =
       time.seconds + "," + time.mmm + " s";
   }
 }
@@ -358,11 +325,11 @@ var students = [];
 
 // Displaying student table
 function displayStudentsResult() {
-  el("students").innerHTML = "";
+  getElement("students").innerHTML = "";
   var studentsHTML = "";
-  var studen = el("count-of-students").value;
+  var studen = getElement("count-of-students").value;
   console.log(studen);
-  var maxScore = el("maximum-score").value;
+  var maxScore = getElement("maximum-score").value;
   var failed = 0;
   scores = [];
   generateScore(parseInt(studen), parseInt(maxScore));
@@ -388,9 +355,9 @@ function displayStudentsResult() {
   </tr>`;
   }
 
-  el("students").innerHTML = studentsHTML;
-  el("failed-s").innerHTML = failed;
-  el("success-s").innerHTML = parseInt(studen) - failed;
+  getElement("students").innerHTML = studentsHTML;
+  getElement("failed-s").innerHTML = failed;
+  getElement("success-s").innerHTML = parseInt(studen) - failed;
 }
 
 // // // // // //
@@ -631,38 +598,18 @@ function shuffle(array) {
 var countries = shuffle(country_list);
 
 // Event listeners for clicking a buttons for sorting countries
-document.getElementById("CiSort").addEventListener(
-  "click",
-  function() {
-    iSort(countries, "Ci");
-  },
-  false
-);
-document.getElementById("CsSort").addEventListener(
-  "click",
-  function() {
-    sSort(countries, "Cs");
-  },
-  false
-);
-document.getElementById("CbSort").addEventListener(
-  "click",
-  function() {
-    bSort(countries, "Cb");
-  },
-  false
-);
-document.getElementById("CqSort").addEventListener(
-  "click",
-  function() {
-    qSort(countries, "Cq");
-  },
-  false
-);
-document.getElementById("CdSort").addEventListener(
-  "click",
-  function() {
-    dSort(countries, "Cd");
-  },
-  false
-);
+getElement("CiSort").onclick = function() {
+  iSort(countries, "Ci");
+};
+getElement("CsSort").onclick = function() {
+  sSort(countries, "Cs");
+};
+getElement("CbSort").onclick = function() {
+  bSort(countries, "Cb");
+};
+getElement("CqSort").onclick = function() {
+  qSort(countries, "Cq");
+};
+getElement("CdSort").onclick = function() {
+  dSort(countries, "Cd");
+};
