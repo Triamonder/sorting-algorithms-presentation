@@ -1,5 +1,4 @@
 // MY FUNCTIONS FOR MORE EASY WORK
-
 function getElement(id) {
   // Shortcut for selection
   return document.getElementById(id);
@@ -42,56 +41,56 @@ function toMiliseconds(milliseconds) {
 // // // // // //
 
 // INSERTION SORT
-function insertionSort(arr) {
-  for (var i = 1; i < arr.length; i++) {
-    var key = arr[i];
+function insertionSort(array) {
+  for (var i = 1; i < array.length; i++) {
+    var key = array[i];
     var y = i - 1;
-    while (y >= 0 && arr[y] > key) {
-      arr[y + 1] = arr[y];
+    while (y >= 0 && array[y] > key) {
+      array[y + 1] = array[y];
       y = y - 1;
     }
-    arr[y + 1] = key;
+    array[y + 1] = key;
   }
-  return arr;
+  return array;
 }
 
 // SELECTION SORT
-function selectionSort(arr) {
-  for (var i = 0; i < arr.length; i++) {
+function selectionSort(array) {
+  for (var i = 0; i < array.length; i++) {
     let min = i; //  storing the index of minimum element
 
-    for (var j = i + 1; j < arr.length; j++) {
-      if (arr[min] > arr[j]) {
+    for (var j = i + 1; j < array.length; j++) {
+      if (array[min] > array[j]) {
         min = j; // updating the index of minimum element
       }
     }
 
     if (i !== min) {
-      let temp = arr[i];
-      arr[i] = arr[min];
-      arr[min] = temp;
+      let temp = array[i];
+      array[i] = array[min];
+      array[min] = temp;
     }
   }
-  return arr;
+  return array;
 }
 
 // BUBBLE SORT functions
-function bubbleSort(arr) {
+function bubbleSort(array) {
   var swapp;
-  var n = arr.length - 1;
+  var n = array.length - 1;
   do {
     swapp = false;
     for (var i = 0; i < n; i++) {
-      if (arr[i] < arr[i + 1]) {
-        var temp = arr[i];
-        arr[i] = arr[i + 1];
-        arr[i + 1] = temp;
+      if (array[i] < array[i + 1]) {
+        var temp = array[i];
+        array[i] = array[i + 1];
+        array[i + 1] = temp;
         swapp = true;
       }
     }
     n--;
   } while (swapp);
-  return arr.reverse();
+  return array.reverse();
 }
 var items = [5, 3, 7, 6, 2, 9];
 function swap(items, leftIndex, rightIndex) {
